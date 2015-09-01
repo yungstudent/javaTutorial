@@ -1,0 +1,57 @@
+1. Fetch the file PersonTest.java, which contains the code from the program listing and load it into your editor.
+
+2. Think of a new property that a person can have and add it to the Person class. You should be able to do this by copying the pattern of the other properties of the Person class. Four changes to the program listing are needed:(a) Add the property name and its type to the “properties” section of the class.   private String country;(b) Add an extra parameter to the the constructor so that the property gets initialised correctly.   public Person(String aName, int anAge, String aCountry) {
+      name    = aName;
+      age     = anAge;
+      country = aCountry;
+   }(c) Modify the main method so that the Luke Skywalker and Winston Peters objects get the appropriate value of the new property.Person ls = new Person("Luke Skywalker",34,"Tatooine");
+Person wp = new Person("Winston Peters",48,"New Zealand");(d) Modify the talk method so that the new property is printed to the screen when the talk method is called.   public void talk() {
+      System.out.println("Hi, my name's " + name);
+      System.out.println("and my age is " + age + ".");
+      System.out.println("I am from " + country + ".");
+      System.out.println();
+      commentAboutAge();
+   }3. Modify the commentAboutAge method to print the message “old person” if the person’s age is greater than sixty.   public void commentAboutAge() {
+      if (age < 5) {
+         System.out.println("baby");
+      }
+      if (age == 5) {
+         System.out.println("time to start school");
+      }
+      if (age > 60) {
+         System.out.println("old person");
+      } 
+   }
+4. In the main method add two calls to commentAboutAge, one for Luke Skywalker and one for Winston Peters.ls.commentAboutAge();
+wp.commentAboutAge();
+5. Write a method growOlder that adds one year to the person’s age. Make Winston Peters get older by one year by putting a call in the main method to do this.HINT: Look at the talk and the commentAboutAge methods to see how to define a method.   public void growOlder() {
+      age++;
+   }
+6. Write a method giveKnighthood that adds the word “Sir” to the beginning of a person’s name. Then make Winston Peters become “Sir Winston Peters” by calling this method from the main method.HINT: This is much like question 5, except you are adding strings instead of numbers.   public void giveKnighthood() {
+      name = "Sir " + name;
+   }7. How is it possible to print the value of Luke Skywalker’s age directly from inside the main method without calling the talk method?HINT: The talk method has a line of code to print the person’s age. Copy this code to the main method, but since you are in another class from the age property, you will need to mention the name of the object in front of the age property, so age becomes ls.age.Also, you will need to change the definition of the age property from private to public to get this change to work. Why you need to do this will be covered in more detail in another exercise.
+   System.out.println("Luke Skywalker’s age is " + ls.age + ".");8. Delete the calls to commentAboutAge that you added in question 4, and instead put a call to commentAboutAge in the talk method. Note that when you are calling a method of the same class you are in, you don’t have to put the object name in front of the method.Your program should generate similar output to what it did before.
+   public void talk() {
+      System.out.println("Hi, my name's " + name);
+      System.out.println("and my age is " + age + ".");
+      System.out.println("I am from " + country + ".");
+      System.out.println();
+      commentAboutAge();
+   }9. Write a growOlderBy method which is similar to the growOlder method, except that it has an int parameter called years which says how many years the person should grow older by.    public void growOlderBy(int years) {
+      age += years;
+   }
+In the main method, place a call to growOlderBy to make Luke Skywalker age by ten years.
+   ls.growOlderBy(10);10. Delete the Person constructor and replace the lines that create the Luke Skywalker and Winston Peters objects with the following:Person ls = new Person(); Person wp = new Person();When a class doesn’t have a constructor, the compiler automatically gives it a zero-argument constructor that sets all numeric values to zero and all reference values to null, meaning “no object”. Run the program again to see what is output.
+
+Hi, my name's null
+and my age is 0.
+I am from null.
+
+baby
+Luke Skywalker’s age is 10.
+
+Hi, my name's Sir null
+and my age is 1.
+I am from null.
+
+baby
