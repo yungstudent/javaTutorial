@@ -1,0 +1,23 @@
+1. Fetch the file CitizenTest.java, which contains the code from the program listing.2. Write a salaryRise method that has one int parameter called amount which increases the person’s salary by that amount. 
+   public void salaryRise(int addToSalary) {
+      salary += addToSalary;	
+   }
+
+Add some code to the main method to raise Ernie’s salary by $10,000.   e.salaryRise(10000);HINT: Look at the setSalary method to see how to write a method with one parameter.3. Write a netWorth method that returns the difference of the person’s savings and their loan.
+Then put some code in the main method to print out Ernie’s net worth.HINT: Look at the getSalary method to see how a method can return a value to themethod which called it.4. If we take away the System.out.println( ) method call from the line that says: e.getSalary(), then nothing is printed to the screen when we run it. If we don’t use the value returned bythe call to getSalary, then why does Java even allow this code to compile?
+- Java's garbage collection will handle return values that are ignored5. Write a toString method that has no parameters and returns a string containing all the information about the citizen, including their name, salary, savings and their loan, if they have one. 
+   public String toString() {
+      return "name: " + name + ", salary: " + salary + ", savings: " + savings + ", loan: " + loan;
+   }
+
+Put a some code into the main method to test it out.
+   System.out.println(b.toString());
+
+6. Next to the constructor, write a second constructor that has one String parameter called name. Make it so that the constructor sets the person’s name and sets every other property to zero dollars. Add the following line of code to the main method to test out this second constructor that you have just written:Citizen f = new Citizen("Fred");
+
+   public Citizen(String aName){
+      name    = aName;
+      salary  = 0;
+      savings = 0;
+      loan    = 0;
+   }

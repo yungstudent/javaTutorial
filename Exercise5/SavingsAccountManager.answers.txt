@@ -1,0 +1,32 @@
+Questions1. Fetch the file SavingsAccount.html and load it into your web browser. The questions of this exercise will guide you through the process of writing the methods and properties described in this javadoc file.2. With your text editor, open a new empty file called SavingsAccount.java which will contain all of the code that you will write for this exercise. Enter the outer shell of the class definition which consists of the following two lines:1
+public class SavingsAccount {}3. Javadoc normally provides you with a list of methods and properties, but in the case of this class there are only methods. This does not mean to say that your class will have no properties however, since javadoc only shows you how the class appears to other classes: that is to say, it only shows the public methods and properties.Since your class will be representing a savings account, you will most certainly need a property in which to store the customer’s current account balance. You should now add such a property inside the braces of the class that you just created. The property will be called balance, should be of type int and should be labelled as private.In general when you are writing a class to meet the requirements that somebody has given to you, you are free to add as many private properties and methods as you like: All that matters as far as the users of the class is concerned is the public methods and properties.   private int balance;
+4. Copythefollowingconstructorwhichsetstheinitialbalancetozero,intotheSavingsAccount class:public SavingsAccount() { balance = 0;}Notice that the javadocs mention a second constructor which allows an initial value to be specified. Add this constructor to the class. This constructor differs from the first only in that it has one int parameter called initialBalance and in what it does with this parameter.
+        public SavingsAccount(int initialBalance) {
+                balance = initialBalance;
+        }
+5. Read the javadocs for the greet method and then add this method to your class. The javadocs contain all the information you need to write this method, including what it should do, what is the return type and parameters of the method, and whether it should be private or public.        public void greet() {
+                System.out.println("Welcome to your savings account.");
+        }6. Read the javadocs for the showBalance method and then add this method to your class. Your method should simply return the current value of balance.        public void showBalance(){
+                System.out.println("Your balance is " + balance);
+        }7. Here is the deposit method which you should copy into your class:public void deposit(int howMuch) { balance = balance + howMuch;}Write the withdraw method which is identical to this one except that the balance goes downby the value howMuch, rather than up.
+        public void withdraw(int howMuch) { 
+                balance = balance - howMuch;
+        }
+8. Notice that the javadocs mention that the deposit and withdraw methods should check for a negative value of howMuch. Make some changes to these methods so that they print an error message if the amount given is negative.        public void deposit(int howMuch) {
+                if (howMuch < 0){
+                        System.out.println("You cannot deposit a negative amount.");
+                }
+                else {
+                        balance = balance + howMuch;
+                }
+        }
+        public void withdraw(int howMuch) {
+                if (howMuch < 0){
+                        System.out.println("You cannot deposit a negative amount.");
+                }
+                else {
+                        balance = balance - howMuch;
+                }
+        }9. Fetch the file SavingsAccountManager.java which contains some code to test out the SavingsAccount class that you have just written. Run this program to verify that that your SavingsAccount class works as intended.
+- verified10. HARDER: Complete the transfer method as stated in the javadocs.
+- The Javadoc does not have a transfer method.

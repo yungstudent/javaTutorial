@@ -1,0 +1,47 @@
+Questions1. Fetch the file DogTest.java, which contains the code of the program listing.2. In the main method of the DogTest class, write code to construct three fleas called Pop, Squeak and Zip. Look at the parameters of the Flea constructor to see how to create the Flea objects.   public static void main(String[] args) {
+      Flea p = new Flea("Pop");
+      Flea s = new Flea("Squeak");
+      Flea z = new Flea("Zip");
+   }3. In the main method of the DogTest class, write code to construct three dogs called Rex, Jimbo and Fido. Note that the third parameter to the Dog class is of type Flea. Therefore you will need to supply a Flea reference for each dog. Make it so that Rex has a flea called Pop, Jimbo has a flea called Squeak, and Fido has a flea called Zip.HINT: If the flea called Pop is referenced by the variable name p, then this reference should appear as the third argument in one of the calls to the Dog constructor.      Dog r = new Dog("Rex",2,p);
+      Dog j = new Dog("Jimbo",3,s);
+      Dog f = new Dog("Fido",5,z);4. Write a toString method in the Dog class that works like the toString method in the Flea class. 
+   public String toString() {
+      return "I am a dog called " + name + ", I am " + age + " years old. My flea is called " + dogsFlea.name + ".";
+   }
+
+Then use this method to print out the full statistics of the three dogs that you have just created in question 3.      Dog r = new Dog("Rex",0,p);
+      System.out.println(r.toString());
+      Dog j = new Dog("Jimbo",0,s);
+      System.out.println(j.toString());
+      Dog f = new Dog("Fido",0,z);
+      System.out.println(f.toString());
+      5. By copying the pattern of the Flea and Dog classes, write a class DogOwner that has three properties: name, salary and ownersDog. Also write a three-parameter constructor for the DogOwner class that sets these properties.
+class DogOwner {
+   // Properties of the class...
+   private String name;
+   private int    salary;
+   private Dog    ownersDog;
+
+   // Constructor of the class...
+   public DogOwner(String aName, int aSalary, Dog aDog) {
+      name      = aName;
+      salary    = aSalary;
+      ownersDog = aDog;
+   }
+}
+6. Add some code into the main method to construct three dog owners called Angus, Brian and Charles. Make it so that Angus has a dog called Rex, Brian has a dog called Jimbo, and Charles has a dog called Fido. Use the Dog references that you created in question 3 to achieve this.      DogOwner a = new DogOwner("Angus",10000,r);
+      DogOwner b = new DogOwner("Brian",15000,j);
+      DogOwner c = new DogOwner("Carles",20000,f);7. Write a toString method for the class DogOwner and add some code to the main method to call it for Angus, Brian and Charles.
+   // Methods of the class...
+   public String toString() {
+      return "I am a dog owner called " + name + ". My salary is " + salary + ". My dog is called " + ownersDog.name;
+   }
+
+      System.out.println(a.toString());
+      System.out.println(b.toString());
+      System.out.println(c.toString());
+8. If your reference to the Angus object is called a, then what is the value of the following: a.ownersDog.dogsFlea.toString()Add some code to the main method to find out.
+      System.out.println(a.ownersDog.dogsFlea.toString());
+
+   Output:
+   I am a flea called Pop
