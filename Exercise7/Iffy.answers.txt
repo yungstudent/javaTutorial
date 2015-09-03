@@ -1,0 +1,33 @@
+Questions1. Fetch the file Iffy.java which contains a simple application with a main method which simply calls the callSomeMethods method which in turn exercises the other methods in the class. The warnIfNegative, resetIfNegative and isInRange methods are each intended to perform simple data validation tasks as described by the header comments. However, none of these three methods work as intended.2. Add to the body of callSomeMethods sufficient calls to warnIfNegative to determine what the problem is. Summarise your findings in a comment.      warnIfNegative(-1);
+      warnIfNegative(0);
+      warnIfNegative(1);
+      // Non negative numbers trigger a warning3. Now modify warnIfNegative so that it behaves as intended.   public void warnIfNegative(int theValue) {
+      if(theValue < 0) {
+         System.out.println("Caution - negative value given (" + theValue + ")");
+      }
+   }
+4. Similarly, add to the body of callSomeMethods sufficient calls to resetIfNegative to de-termine what the problem is. Summarise your findings in a comment.      resetIfNegative();
+      System.out.println("Value of integer property is: " + anIntProp);
+      // A positive value is also reset5. Now modify resetIfNegative so that it behaves as intended.   public void resetIfNegative() {
+      if(anIntProp < 0) {
+         System.out.println("Caution - negative value given (" + anIntProp + ")");
+         anIntProp = 0;
+      }
+   }
+6. Now uncomment the method isInRange. The code was commented out because it causes compilation errors. Fix the code so it performs as intended and compiles correctly.   public boolean isInRange(int value, int upperBound, int lowerBound) {
+      if(lowerBound <= value && value <= upperBound ){
+         return true;
+      }
+      else {
+         return false;
+      }
+   }7. Add to the body of callSomeMethods sufficient calls to isInRange to illustrate how your correct version works.      System.out.println("3 is between 1 and 5: " + isInRange(3,5,1));
+      System.out.println("7 is between 1 and 5: " + isInRange(7,5,1));
+      System.out.println("0 is between 1 and 5: " + isInRange(0,5,1));
+8. Is an if statement really necessary in this example? Write a isInRangeIfLess method which gives the same results as isInRange but which does not use an if statement.   public boolean isInRange(int value, int upperBound, int lowerBound) {
+      return (lowerBound <= value && value <= upperBound );
+   }
+9. Finally, if you are feeling keen, extend isInRange so that it prints a warning message if the upper bound is less than or equal to the lower bound.
+      if (upperBound <= lowerBound) {
+        System.out.println("Caution - upper bound is smaller than or equal to lower bound");
+      }
