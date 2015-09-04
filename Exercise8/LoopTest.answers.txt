@@ -1,0 +1,28 @@
+Questions1. Fetch the file LoopTest.java.2. In the doStuff method, some lines of code to test out the methods powerOf2A, powerOf2Band powerOf2C.      System.out.println(powerOf2A(3));
+      System.out.println(powerOf2B(3));
+      System.out.println(powerOf2C(3));
+3. There is a bug in the powerOf2B method because it does not behave identically to the other two methods in the case when n is zero. Put an if statement at the top of this method to make it handle the case of zero properly.      if (n == 0) return 1;4. BycopyingthepatternofpowerOf2A,powerOf2BandpowerOf2C,writemethodsprintLineA and printLineB that work identically to the method printLineC, except that they use while loops and do loops. 
+   public void printLineA(int length) {
+      int counter = length;
+      while (counter != 0) {
+         System.out.print("#");
+         counter--;
+      }
+      System.out.println();
+   }
+
+   public void printLineB(int length) {
+      if (length == 0) return;
+      int counter = length;
+      do {
+         System.out.print("#");
+         counter--;
+      } while (counter != 0 );
+      System.out.println();
+   }
+
+Add some code to the doStuff method to test them out.
+      printLineA(5);
+      printLineB(5);
+      printLineC(5);
+
