@@ -1,0 +1,32 @@
+Questions1. Theoretical example of inheritance.(a) Fetch the file AnimalTest.java and examine the source code to see four classes: Animal, Bird and Eagle and a tester class AnimalTest. Class Bird inherits from Animal and class Eagle inherits from Bird.(b) Use your understanding of inheritance to say which of the statements will not compile and why. Then use the compiler to check that your guesses were correct and comment out all the statements with errors in them.For each statement that doesn’t compile, comment it out and beside it write a brief reason why the compiler doesn’t accept it.NOTE: It is essential for the next question that the incorrect lines are commented out.      // Animal has no fly method
+      //a.fly();
+
+      // Bird has no numberOfKills property
+      //System.out.println(b.numberOfKills);
+
+      // Bird has no attack method
+      //b.attack(); 
+
+      // numberOfKills is a private property
+      //System.out.println(e.numberOfKills);
+(c) Run the application AnimalTest.class to see what is printed to the screen.4
+false
+Hello
+2
+true
+true
+Hello
+2
+true
+Hello(d) Why is the number printed out for e.numberOfLegs equal to 2 when there is no mention of ever setting the value for numberOfLegs to 2 in the Eagle class?HINT: It has something to do with inheritance.The numberOfLegs property is inherited from the Bird class, which gives it a default value of 2.(e) Add the following three lines to the main method:         a = b;         a.talk();         a.fly();If you compile the code, one of these lines gives a compiler error. Which line is it and what is the reason for the error?The line "a.fly()" does not compile because a is an object of the Animal class, which doesn't have a fly method.(f) Add the following three lines to the main method:         b = a;         b.talk();         b.fly();If you compile the code, one of these lines gives a compiler error. Which line is it and what is the reason for the error?The line "b = a" does not compile because the Bird class extends the Animal class, not the other way around.2. Practical example of inheritance.2
+(a) Fetch the file StarWars.java which contains a program to simulate a battle between the two enemies of the Star Wars trilogy, the Rebel Alliance (the “goodies”) and the Dark Side (the “baddies”). Run the program to see the battle unfold.The file StarWars.java is comprised of three classes: XWing, TieFighter and StarWars. The first two represent spacecraft of the goodies and the baddies, respectively. The third class contains code for running the battle.If you look at the Java code for the XWing and TieFighter classes you will notice that they are almost identical: They have the same methods and properties, the only difference is that the X-Wings are initialised with a different value for their shields and weapon properties to the TieFighter class.The next few questions will guide you through the process of using inheritance to eliminate this unnecessary duplication of code.(b) Here is the UML diagram for the XWing and TieFighter classes:You will create a new class called SpaceShip and move most of code from the XWing and TieFighter classes into this class. Then you will make these two classes inherit from SpaceShip like so:XWingshields weapon deadgetWeapon() isDead()hit()TieFightershields weapon deadgetWeapon() isDead()hit()SpaceShipshields weapon deadgetWeapon() isDead()hit()XWingTieFighterThe first step in this process is to create the outer shell of the SpaceShip class, which you should now add to the file StarWars.java:class SpaceShip { }(c) Move the properties shields, weapon and dead out of the XWing and TieFighter classes and into the SpaceShip class. You must change the privacy status of the prop- erties from private to protected.The protected modifier was invented as an intermediate level of privacy between public and private. Like private, it allows visibility to the same class in which the method or property was defined, but unlike private it also allows visibility to subclasses of the class in which the method or property was defined.class SpaceShip {
+   
+   // Properties of the class...
+   protected int     shields;
+   protected int     weapon;
+   protected boolean dead;
+
+}
+
+
+(d) Move the three methods getWeapon, isDead and hit out of the XWing and TieFighter classses and into the SpaceShip class. At this point, the XWing and TieFighter classes should contain nothing but a constructor.(e) Finally, add the extends keyword to the first line of the XWing and TieFighter classes:class XWing extends SpaceShip {...class TieFighter extends SpaceShip {(f) Compile and run your program again, making sure that it produces the same results now that it is using inheritance.(g) The SpaceShip class is a superclass of both XWing and TieFighter containing ev- erything that X-Wings and Tie Fighters contain in common. Because the role of the SpaceShip class is simply to hold these commonalities, we might choose to label the class with the abstract keyword:abstract class SpaceShip {This prevents us from creating instances of the SpaceShip class. Without the abstract modifier, we could happily create a new SpaceShip(), which would be an object that is not an X-Wing, nor a Tie Fighter, but just a vague “space ship”. If we consider this to be a logical mistake then we can use abstract to prevent such calls to the SpaceShip constructor.Change the class SpaceShip to be abstract and observe how the compiler will not accept any lines of the form:SpaceShip s = new SpaceShip();Remove the abstract keyword and notice how the compiler will then allow this line to compile.
