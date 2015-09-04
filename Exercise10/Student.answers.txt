@@ -1,0 +1,116 @@
+Questions1. Standard Input and Exceptions(a) Fetch a copy of Student.java. Compile and run it, and check that you understand itscode.(b) Add a method readAge which reads an int value from the standard input and assigns the value to the age property. Add a method printAge which prints the student’s age on the standard output. Invoke both methods on the me object in the main method. Note that you will need to convert the String object returned by stdIn.readLine() to an int value. Look up the Integer class in java.lang for information on how to do this.  public void readAge () throws IOException {
+    System.out.print("Input your age: ");
+    age = Integer.parseInt(stdIn.readLine());
+  }
+
+  public void printAge (){
+    System.out.println("Age: " + age);
+  }
+    me.readAge();
+    me.printAge();(c) What happens when you type a series of alphabetical characters instead of a number for the age?  Output:
+Exception in thread "main" java.lang.NumberFormatException: For input string: "ffr"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:492)
+	at java.lang.Integer.parseInt(Integer.java:527)
+	at Student.readAge(Student.java:21)
+	at Student.main(Student.java:42)(d) Addatry-catchstatementtothemethodreadAgesothattheexceptionsNumberFormatException and IOException cannot be thrown by the method. If an IOException exception oc-curs, the program should terminate with a suitable error message. If an NumberFormatException occurs, the age should be set to -1 and an error message should be printed out.HINT: The readLine() method call throws the I/O exceptions whenever the user’s keyboard blows up or for some equally unlikely reason. The method from the Integer class throws Number Format exceptions. The try block should go around these two method calls.  public void readAge () throws IOException {
+    System.out.print("Input your age: ");
+    try {
+        age = Integer.parseInt(stdIn.readLine());
+    }
+    catch (IOException exception) {
+        System.out.println("Something went wrong.");
+        System.exit(0);
+    }
+    catch (NumberFormatException exception) {
+        age = -1;
+        System.out.println("That is not a number.");                  
+    }
+  }
+
+
+(e) Add further statements to the readAge method so that it repeatedly loops until the user enters an age in the range 0 to 150. If NumberFormatException objects are thrown, then the user should be prompted to try again.  public void readAge () throws IOException {
+    int validInput = 0;
+
+    while (validInput == 0) {
+      System.out.print("Input your age: ");
+      try {
+          age = Integer.parseInt(stdIn.readLine());
+          if (age >= 0 && age <= 150){
+             validInput = 1;
+          }
+          else {
+             System.out.println("Please enter a number in the range 0 to 150.");
+          }
+      }
+      catch (IOException exception) {
+          System.out.println("Something went wrong.");
+          System.exit(0);
+      }
+      catch (NumberFormatException exception) {
+          age = -1;
+          System.out.println("That is not a number, please try again.");
+      }
+    }
+  }2. Working with exceptions. A very sloppy programmer has created a random number generator class called BadRandom that provides a method randVal. The method signature for randVal is as follows:public static int randVal();This method periodically throws the following exceptions:• ArithmeticException• NullPointerException• ArrayIndexOutOfBoundsException• ClassCastException• NegativeArraySizeException.(a) Fetch a copy of BadRandom.class(b) YouaretowriteaclasscalledBRTestthatcollectsdataoncallstoBadRandom.randVal() and the values it returns. Items that you should add to the BRTest class are detailed below.(c) Add private int properties calls, successfulCalls and totalReturned which store the total number of times BadRandom.randVal() has been called, the number of times BadRandom.randVal() has successfully returned a random value, and the total of the successfully returned values.  private int totalReturned = 0;  private int calls = 0;  private int successfulCalls = 0;(d) Add an array of int values called excepCounts (a private property). The excepCounts array will store the number of occurrences of each of the exceptions listed above.  private int[] excepCounts = new int[5];(e) Add a method public void callIt() which is used to keep track of calls to the method BadRandom.randVal(), as follows.• Each invocation of callIt increments the value in calls.• callIt then calls BadRandom.randVal().• If the call successfully returns a random value, then successfulCalls is incre-mented and the value returned is added to totalReturned.• If the call throws an exception then the exception is caught and the exceptionmessage is printed on the standard output. The array element associated with this type of exception in excepCounts is incremented.        public void callIt () { 
+                calls++;
+                try {
+                        totalReturned += BadRandom.randVal(); 
+                        successfulCalls++;
+                }
+                catch (ArithmeticException e) {
+                        System.out.println(e.getMessage());
+                        excepCounts[ARITHMETICEXCEPTION]++; 
+                }                catch (NullPointerException e) { 
+                        System.out.println(e.getMessage()); 
+                        excepCounts[NULLPOINTEREXCEPTION]++;
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                        excepCounts[ARRAYINDEXOUTOFBOUNDSEXCEPTION]++; 
+                }
+                catch (ClassCastException e) { 
+                        System.out.println(e.getMessage()); 
+                        excepCounts[CLASSCASTEXCEPTION]++;
+                }
+                catch (NegativeArraySizeException e) {
+                        System.out.println(e.getMessage());                             
+                        excepCounts[NEGATIVEARRAYSIZEEXCEPTION]++; 
+                }
+        }(f) Add a method public void resetCounts() which resets all of the BRTest count values to zero: calls, successfulCalls, totalReturned and each of the exception counts in excepCounts.        public void resetCounts () { calls = 0;
+                totalReturned = 0;
+                successfulCalls = 0;
+                for (int i = 0; i < 5; i++){
+                        excepCounts[i] = 0;
+                }
+        }(g) Add a method public void nRandInts(int n) which repeatedly calls callIt until n integer values have been successfully returned by BadRandom.randVal() (where n is an integer value greater than zero).        public void nRandInts (int n) {
+                while (successfulCalls < n) {
+                        callIt();
+                }
+        }(h) Add a method public void writeData() which writes to the standard output the following data:• The number of calls to BadRandom.randVal().• The number of successful calls to BadRandom.randVal(). • The total of the values returned by the successful calls.2
+• The percentage of calls to BadRandom.randVal() which threw each type of excep- tion identified above.• The percentage of calls to BadRandom.randVal() which successfully returned an integer.        public void writeData () {
+                System.out.println("\n\n==========================================");
+                System.out.println("Number of calls: " + calls);
+                System.out.println("Successful calls: " + successfulCalls);
+                System.out.println("Total returned: " + totalReturned);
+                System.out.println("Percentage Arithmetic Exceptions: " +
+                        ((float) excepCounts[ARITHMETICEXCEPTION]/calls*100));
+                System.out.println("Percentage Null Pointer Exceptions: " +
+                        ((float) excepCounts[NULLPOINTEREXCEPTION]/calls*100));
+                System.out.println("Percentage Array Index Exceptions: " +
+                        ((float) excepCounts[ARRAYINDEXOUTOFBOUNDSEXCEPTION]/calls*100));
+                System.out.println("Percentage Class Cast Exceptions: " +
+                        ((float) excepCounts[CLASSCASTEXCEPTION]/calls*100));
+                System.out.println("Percentage Negative Array Exceptions: " +
+                        ((float) excepCounts[NEGATIVEARRAYSIZEEXCEPTION]/calls*100));
+                System.out.println("Percentage of successful calls: " + ((float) successfulCalls/calls*100));
+                System.out.println("==========================================\n\n");
+        }(i) Add statements to the main method of BRTest to test the methods you have written. 
+        public static void main (String[] args) {
+                BRTest me = new BRTest();
+                me.resetCounts();
+                me.nRandInts(30);
+                me.writeData();
+        }
+
+Note that the following main program:public static void main(String[] args) { BRTest me = new BRTest(); me.resetCounts();me.nRandInts(30);me.writeData(); }should produce output similar to this:ArithmeticException: Division by zero!NegativeArraySizeException: Squaaawk! Screetch. Burp. ArrayIndexOutOfBoundsException: Accessing 11th element of 10 element array! NullPointerException: Uninitialised object reference.ClassCastException: Casting apples into oranges.ClassCastException: Casting apples into oranges.ArithmeticException: Division by zero!NegativeArraySizeException: Squaaawk! Screetch. Burp.NullPointerException: Uninitialised object reference.ClassCastException: Casting apples into oranges.ClassCastException: Casting apples into oranges.ClassCastException: Casting apples into oranges.ArithmeticException: Division by zero!========================================== Number of calls: 43Successful calls: 30Total returned: 48Percentage Arithmetic Exceptions: 6.9767447 Percentage Null Pointer Exceptions: 4.6511626 Percentage Array Index Exceptions: 2.3255813 Percentage Class Cast Exceptions: 11.627908 Percentage Negative Array Exceptions: 4.6511626 Percentage of successful calls: 69.76744 ==========================================
