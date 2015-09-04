@@ -1,0 +1,31 @@
+Questions1. Non-object arrays.(a) Fetch the file ArrayTest.java and load it into your editor.(b) Add a line to the doStuff method to create a new array called nums of ten floating-point numbers. Use the double type for double-precision floating-point numbers.HINT: Look at how the fred array was created and copy the pattern for this.      double[] nums = new double[10];(c) Use a for loop to set the elements of the nums array to the values 1.0, 1.1, 1.2, through to 1.9.      // set values of nums array
+      for (int i=0; i<10; i++) {
+         nums[i] = 1 + i*0.1;
+      }(d) Write a second for loop to print out the elements of the nums array to make sure that the values are what they are supposed to be. Compile and run the program to find out. NOTE: Java’s double and float types are incapable of storing some numbers exactly, so there may be some inexactness in the values that are printed out for this question.      // print values of nums array
+      for(int i=0; i<10; i++){
+         System.out.println(nums[i]);
+      }(e) Fetch the files ArrayPrint.html and ArrayPrint.class, then load the html file into your web browser. This web page contains the javadocs of the ArrayPrint class which contains two static printArray methods. Place a call to one of these methods to print the contents of your nums array. Hopefully this will produce similar results to the previous question.      // print nums array using ArrayPrint
+      ArrayPrint.printArray(nums);(f) Now write your own printArray method in the ArrayTest class that does the same job as the corresponding method in the ArrayPrint class.HINT: Your printArray method should be general-purpose enough to work with double arrays of any given length. To do this you will need to access the length property of the array object. If your array is called x, then the length of this array is given by: x.length.   public void printArray(double[] anArray) {
+      for(int i=0; i<anArray.length; i++){
+         System.out.println(anArray[i]);
+      }
+   }(g) Add a call to the printArray method that you have just written and verify that it produces the correct output for the nums array.      // print nums array printArray method
+      printArray(nums);2. Object arrays.(a) Fetch the file ArrayTest2.java and load it into your editor.(b) In the doStuff method, define an array of three Human objects called threesome.HINT: This is almost identical to what you did to create the double array in ques- tion 1b, except that the class Human appears in place of the type double.
+      // create object array threesome
+      Human[] threesome = new Human[3];
+
+(c) Create three new Human objects with names Angus, Brian and Charles and assign them to the threesome array.
+      // add humans to threesome array
+      threesome[0] = new Human("Angus");
+      threesome[1] = new Human("Brian");
+      threesome[2] = new Human("Charles");
+(d) Add a for loop to print out the three Human objects using each object’s toString method.HINT: This is very similar to question 1d.
+      // print out humans in threesome
+      for(int i=0; i<3; i++){
+         System.out.println(threesome[i].toString());
+      }(e) Write a printArray method that works like the printArray method that you wrotein question 1f, except that this time it accepts Human arrays as an argument.HINT: Copy the code from question 1f, but replace every occurrence of double with Human[].   public void printArray(Human[] anArray) {
+      for(int i=0; i<anArray.length; i++){
+         System.out.println(anArray[i]);
+      }
+   }(f) Call the printArray method that you wrote in the previous question, passing the array threesome as the argument.
+      printArray(threesome);
